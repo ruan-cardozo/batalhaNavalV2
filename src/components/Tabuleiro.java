@@ -21,6 +21,5 @@ public class Tabuleiro {
             matriz[linhaInicial + 4][colunaInicial] = caracter;
         }
     }
-
 }
 

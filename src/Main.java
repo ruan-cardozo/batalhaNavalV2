@@ -16,9 +16,9 @@ public class Main {
         int countContraTorpedeiro = 0;
         int countSubmarino = 0;
 
-        final String FILE = "C:\\Users\\glauc\\IdeaProjects\\batalhanaval\\src\\posicoes.csv";
+        final String FILE = "C:\\Users\\glauco.scheffel\\IdeaProjects\\batalhanaval\\src\\posicoes.csv";
         LOG.info("Iniciando leitura do arquivo");
-        embarcacoes = CarregadorEmbarcacoes.carregarEmbarcacoes(FILE);
+        embarcacoes = CarregadorEmbarcacoes.carregar(FILE);
 
         Tabuleiro tabuleiro = new Tabuleiro(10);
 

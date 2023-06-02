@@ -1,7 +1,7 @@
 package components;
 
 public class PosicaoFactory {
-    public static Posicao criarEmbarcacao(String tipo, int linhaInicial, int colunaInicial) {
+    public static Posicao criar(String tipo, int linhaInicial, int colunaInicial) {
         if (tipo.equals("PortaAvião")) {
             return new PortaAviao(linhaInicial, colunaInicial);
         } else if (tipo.equals("NavioTanque")) {
