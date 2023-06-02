@@ -1,4 +1,4 @@
-import components.Embarcacao;
+import components.Posicao;
 import components.Tabuleiro;
 import util.CarregadorEmbarcacoes;
 
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class Main {
-    List<Embarcacao> embarcacoes;
+    List<Posicao> embarcacoes;
     private static final Logger LOG = Logger.getAnonymousLogger();
 
     public  void loader() {
@@ -22,9 +22,9 @@ public class Main {
 
         Tabuleiro tabuleiro = new Tabuleiro(10);
 
-        for (Embarcacao embarcacao : embarcacoes) {
-            tabuleiro.adicionarEmbarcacao(embarcacao);
-            LOG.info(embarcacao.getTipo());
+        for (Posicao posicao : embarcacoes) {
+            tabuleiro.adicionarEmbarcacao(posicao);
+            LOG.info(posicao.getTipo());
         }
         LOG.info("Finalizando leitura arquivo");
     }

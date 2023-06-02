@@ -1,11 +1,11 @@
 package components;
-public abstract class Embarcacao {
+public abstract class Posicao {
     protected String tipo;
     protected int linhaInicial;
     protected int colunaInicial;
     protected char caracter;
 
-     Embarcacao(String tipo, int linhaInicial, int colunaInicial, char caracter) {
+     Posicao(String tipo, int linhaInicial, int colunaInicial, char caracter) {
         this.tipo = tipo;
         this.linhaInicial = linhaInicial;
         this.colunaInicial = colunaInicial;
