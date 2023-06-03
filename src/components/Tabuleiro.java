@@ -30,6 +30,21 @@ public class Tabuleiro {
             matriz[linhaInicial + (3 * vertical) ][colunaInicial + (3 * horizontal)] = caracter;
             matriz[linhaInicial + (4 * vertical) ][colunaInicial + (4 * horizontal)] = caracter;
         }
+
+        if (posicao instanceof Submarino) {
+            matriz[linhaInicial + (1 * vertical) ][colunaInicial + (1 * horizontal)] = caracter;
+        }
+
+        if (posicao instanceof NavioTanque) {
+            matriz[linhaInicial + (1 * vertical) ][colunaInicial + (1 * horizontal)] = caracter;
+            matriz[linhaInicial + (2 * vertical) ][colunaInicial + (2 * horizontal)] = caracter;
+            matriz[linhaInicial + (3 * vertical) ][colunaInicial + (3 * horizontal)] = caracter;
+        }
+
+        if (posicao instanceof ContraTorpedeiro) {
+            matriz[linhaInicial + (1 * vertical) ][colunaInicial + (1 * horizontal)] = caracter;
+            matriz[linhaInicial + (2 * vertical) ][colunaInicial + (2 * horizontal)] = caracter;
+        }
     }
 
     public int getTamanho() {
@@ -38,6 +53,9 @@ public class Tabuleiro {
 
     public char[][] getMatriz() {
         return this.matriz;
+        }
+
+    public int getPontuacao() {
+        return 0;
     }
 }
-

@@ -5,11 +5,11 @@ public class PosicaoFactory {
         if (tipo.equals("PortaAvião")) {
             return new PortaAviao(linhaInicial, colunaInicial);
         } else if (tipo.equals("NavioTanque")) {
-            return null;
+            return new NavioTanque(linhaInicial, colunaInicial);
         } else if (tipo.equals("ContraTorpedeiro")) {
-            return null;
+            return new ContraTorpedeiro(linhaInicial, colunaInicial);
         } else if (tipo.equals("Submarino")) {
-            return null;
+            return new Submarino(linhaInicial, colunaInicial);
         }
 
         return null;

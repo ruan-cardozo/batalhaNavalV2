@@ -2,19 +2,20 @@ import components.Posicao;
 import components.Tabuleiro;
 import util.CarregadorEmbarcacoes;
 import view.Visualizador;
-
 import java.util.List;
 import java.util.logging.Logger;
 
-public class Main {
+public class Jogo {
     private static final Logger LOG = Logger.getAnonymousLogger();
     private List<Posicao> embarcacoes;
     private Tabuleiro tabuleiro = new Tabuleiro(10);
 
+
     public  void loader() {
-        final String FILE = "C:\\Users\\glauco.scheffel\\IdeaProjects\\batalhanaval\\src\\posicoes.csv";
+        final String FILE = "C://Users//RUAND//projetos//Faculdade//batalhanaval//src//posicoes.csv/";
         LOG.info("Iniciando leitura do arquivo");
         embarcacoes = CarregadorEmbarcacoes.carregar(FILE);
+
         LOG.info("Finalizando leitura arquivo");
     }
 
@@ -26,11 +27,40 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Main game = new Main();
+        Jogo game = new Jogo();
         game.loader();
         game.criarTabuleiro();
-        game.visualizar();
+        while(! game.estaTerminado()) {
+            game.visualizar();
+            game.solicitarJogada();
+            game.jogar();
 
+        }
+        game.terminar();
+
+    }
+
+    private void terminar() {
+        // mostrar pontuação
+        // mostrar quem ganhou
+        // mostrar mensagem de fim de jogo
+
+    }
+
+    private void jogar() {
+        // verificar se a jogada é válida
+        // verificar se a jogada acertou alguma embarcação
+        // atualizar o tabuleiro
+    }
+
+    private void solicitarJogada() {
+        // digitar linha e coluna da jogada
+    }
+
+    private boolean estaTerminado() {
+        // verificar se o jogo terminou
+        // se todas as embarcacoes foram destruidas terminou
+        return false;
     }
 
     private void visualizar() {
