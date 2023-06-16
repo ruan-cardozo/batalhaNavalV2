@@ -58,4 +58,15 @@ public class Tabuleiro {
     public int getPontuacao() {
         return 0;
     }
+
+    public char verificarJogada(int linha, int coluna) {
+        return 0;
+    }
+
+    public void setPosicao(int linha, int coluna, char resultado) {
+    }
+
+    public boolean todasEmbarcacoesDestruidas() {
+        return false;
+    }
 }

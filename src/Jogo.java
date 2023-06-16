@@ -2,7 +2,9 @@ import components.Posicao;
 import components.Tabuleiro;
 import util.CarregadorEmbarcacoes;
 import view.Visualizador;
+
 import java.util.List;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 public class Jogo {
@@ -10,12 +12,10 @@ public class Jogo {
     private List<Posicao> embarcacoes;
     private Tabuleiro tabuleiro = new Tabuleiro(10);
 
-
-    public  void loader() {
-        final String FILE = "C://Users//RUAND//projetos//Faculdade//batalhanaval//src//posicoes.csv/";
+    public void loader() {
+        final String FILE = "C://Users//RUAND//projetos//Faculdade//batalhanaval//src//posicoes.csv";
         LOG.info("Iniciando leitura do arquivo");
         embarcacoes = CarregadorEmbarcacoes.carregar(FILE);
-
         LOG.info("Finalizando leitura arquivo");
     }
 
@@ -30,41 +30,59 @@ public class Jogo {
         Jogo game = new Jogo();
         game.loader();
         game.criarTabuleiro();
-        while(! game.estaTerminado()) {
+        while (!game.estaTerminado()) {
             game.visualizar();
             game.solicitarJogada();
-            game.jogar();
-
         }
         game.terminar();
-
     }
 
     private void terminar() {
-        // mostrar pontuação
-        // mostrar quem ganhou
-        // mostrar mensagem de fim de jogo
-
+        visualizar();
+        boolean todasEmbarcacoesDestruidas = tabuleiro.todasEmbarcacoesDestruidas();
+        if (todasEmbarcacoesDestruidas) {
+            System.out.println("Você ganhou!");
+        } else {
+            System.out.println("Você perdeu!");
+        }
+        System.out.println("Fim de jogo!");
     }
 
-    private void jogar() {
-        // verificar se a jogada é válida
-        // verificar se a jogada acertou alguma embarcação
-        // atualizar o tabuleiro
+    private void jogar(int linha, int coluna) {
+        if (linha < 0 || linha >= tabuleiro.getTamanho() || coluna < 0 || coluna >= tabuleiro.getTamanho()) {
+            System.out.println("Jogada inválida, tente novamente.");
+            return;
+        }
+
+        char resultado = tabuleiro.verificarJogada(linha, coluna);
+        if (resultado == 'S') {
+            System.out.println("Você acertou um navio!");
+        } else {
+            System.out.println("Você errou, não tem embarcação nessa posição :(");
+        }
+        tabuleiro.setPosicao(linha, coluna, resultado);
+
+        visualizar();
     }
 
     private void solicitarJogada() {
-        // digitar linha e coluna da jogada
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Digite a linha da jogada: ");
+        int linha = scanner.nextInt();
+
+        System.out.print("Digite a coluna da jogada: ");
+        int coluna = scanner.nextInt();
+
+        jogar(linha, coluna);
     }
 
     private boolean estaTerminado() {
-        // verificar se o jogo terminou
-        // se todas as embarcacoes foram destruidas terminou
-        return false;
+        return tabuleiro.todasEmbarcacoesDestruidas();
     }
 
     private void visualizar() {
-        Visualizador v = new Visualizador(tabuleiro);
-        v.ver();
+        Visualizador visualizador = new Visualizador(tabuleiro);
+        visualizador.ver();
     }
 }
