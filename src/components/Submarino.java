@@ -1,7 +1,8 @@
 package components;
 
-class Submarino extends Posicao {
-	Submarino(int linhaInicial, int colunaInicial) {
-		super("Submarino", linhaInicial, colunaInicial, 'S');
+class Submarino extends Embarcacao {
+	Submarino(Cordenada cordenada) {
+		super("Submarino", cordenada, 'S');
+		tamanho = 1;
 	}
 }

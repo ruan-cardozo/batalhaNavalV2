@@ -1,7 +1,8 @@
 package util;
 
-import components.Posicao;
-import components.PosicaoFactory;
+import components.Cordenada;
+import components.Embarcacao;
+import components.EmbacacaoFactory;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,8 +14,8 @@ import java.util.logging.Logger;
 
 public class CarregadorEmbarcacoes {
     private static final Logger LOG = Logger.getAnonymousLogger();
-    public static List<Posicao> carregar(String nomeArquivo) {
-        List<Posicao> embarcacoes = new ArrayList<>();
+    public static List<Embarcacao> carregar(String nomeArquivo) {
+        List<Embarcacao> embarcacoes = new ArrayList<>();
 
         try {
             int contador = 0;
@@ -28,7 +29,8 @@ public class CarregadorEmbarcacoes {
                 int linhaInicial = Integer.parseInt(parts[1].trim());
                 int colunaInicial = Integer.parseInt(parts[2].trim());
 
-                Posicao posicao = PosicaoFactory.criar(tipo, linhaInicial, colunaInicial);
+                Cordenada c = new Cordenada(linhaInicial, colunaInicial);
+                Embarcacao posicao = EmbacacaoFactory.criar(tipo, c);
                 if (posicao != null) {
                     embarcacoes.add(posicao);
                     contador++;

@@ -1,7 +1,8 @@
 package components;
 
-public class Agua extends  Posicao{
-    Agua(int linhaInicial, int colunaInicial) {
-        super("Agua", linhaInicial, colunaInicial, 'A');
+public class Agua extends Embarcacao {
+    Agua(Cordenada cordenada) {
+        super("Agua", cordenada, 'N');
+        tamanho = 1;
     }
 }

@@ -1,7 +1,8 @@
 package components;
 
-class ContraTorpedeiro extends Posicao {
-	ContraTorpedeiro(int linhaInicial, int colunaInicial) {
-		super("NavioTanque", linhaInicial, colunaInicial, 'C');
+class ContraTorpedeiro extends Embarcacao {
+	ContraTorpedeiro(Cordenada cordenada) {
+		super("ContraTorpedeiro", cordenada, 'c');
+		tamanho = 4;
 	}
 }

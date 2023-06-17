@@ -32,6 +32,6 @@ public class Visualizador {
 
         }
         System.out.print("\n ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
-        System.out.println("         Jogada (linha,coluna) ->\n" +  );
+        System.out.println("         Jogada (linha,coluna) -> @\n");
     }
 }
