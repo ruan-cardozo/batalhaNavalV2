@@ -30,9 +30,9 @@ public class CarregadorEmbarcacoes {
                 int colunaInicial = Integer.parseInt(parts[2].trim());
 
                 Cordenada c = new Cordenada(linhaInicial, colunaInicial);
-                Embarcacao posicao = EmbacacaoFactory.criar(tipo, c);
-                if (posicao != null) {
-                    embarcacoes.add(posicao);
+                Embarcacao embarcacao = EmbacacaoFactory.criar(tipo, c);
+                if (embarcacao != null) {
+                    embarcacoes.add(embarcacao);
                     contador++;
                     LOG.info("Embarcacao adicionada " + contador);
                 }

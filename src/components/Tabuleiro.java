@@ -3,6 +3,8 @@ package components;
 import java.util.LinkedList;
 
 public class Tabuleiro {
+    public static final char ACERTOU = 'X';
+    public static final char NAO_ACERTOU = 'E';
     private char[][] matriz;
     private int tamanho;
     private Cordenada cordenada;
@@ -52,8 +54,21 @@ public class Tabuleiro {
 
     }
 
-    public char verificarJogada(int linha, int coluna) {
-        return 0;
+    public char verificarJogada(Cordenada cordenada) {
+        char acertou = NAO_ACERTOU;
+        for (Embarcacao embarcacao : embarcacoes) {
+            if(embarcacao.foiAcertada(cordenada)) {
+                acertou = ACERTOU;
+                break; // para o loop
+            }
+        }
+        posicaoJogada(cordenada,acertou);
+        return acertou;
+    }
+
+    private void posicaoJogada(Cordenada cordenada, char resultado) {
+        matriz[cordenada.getLinha()][cordenada.getColuna()] = resultado; // marca a jogada na matri
+        // copilot nao colocou o ; na linha de cima isso fui eu
     }
 
     public void setPosicao(Cordenada cordenada, char resultado) {

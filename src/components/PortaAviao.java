@@ -8,5 +8,6 @@ class PortaAviao extends Embarcacao {
 
     public PortaAviao(int linhaInicial, int colunaInicial) {
         super("PortaAvião", new Cordenada(linhaInicial, colunaInicial), 'P');
+        tamanho = 5;
     }
 }

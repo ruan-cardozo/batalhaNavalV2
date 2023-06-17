@@ -70,4 +70,15 @@ public abstract class Embarcacao {
     public Cordenada getCordenada() {
         return  this.cordenada;
     }
+
+    public boolean foiAcertada(Cordenada cordenada) {
+        // isso ta certo
+        // medo da bruxaria // copilot da github
+        for (Cordenada cordenadaEmbarcacao : cordenadas) {
+            if( cordenadaEmbarcacao.equals(cordenada) ) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
