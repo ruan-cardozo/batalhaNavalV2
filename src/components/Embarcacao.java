@@ -14,8 +14,17 @@ public abstract class Embarcacao {
 
     protected char direcao;
 
+    protected int pontuacao;
+
     public int getTamanho() {
         return tamanho;
+    }
+
+    private void atingir() {
+        pontuacao += 10;
+    }
+    public int getPontuacao() {
+        return pontuacao;
     }
 
     public Embarcacao(String tipo, Cordenada cordenada, char caracter, int tamanho, char direcao) {
@@ -58,11 +67,6 @@ public abstract class Embarcacao {
         return false;
     }
 
-    public int getPontuacao() {
-         // para cada posicao atingida retornar 10 pontos
-        return 0;
-    }
-
     public void adicionarCordenada(Cordenada cordenada) {
         this.cordenadas.add(cordenada);
     }
@@ -76,6 +80,7 @@ public abstract class Embarcacao {
         // medo da bruxaria // copilot da github
         for (Cordenada cordenadaEmbarcacao : cordenadas) {
             if( cordenadaEmbarcacao.equals(cordenada) ) {
+                atingir();
                 return true;
             }
         }
