@@ -1,5 +1,6 @@
 package view;
 
+import components.Cordenada;
 import components.Tabuleiro;
 
 public class Visualizador {
@@ -17,9 +18,11 @@ public class Visualizador {
 
         System.out.print("            0 1 2 3 4 5 6 7 8 9\n");
 
-        for (int linha = 0; linha < tamanho; linha++) {
+        int linha;
+        int coluna = 0;
+        for (linha = 0; linha < tamanho; linha++) {
             System.out.print("          " + linha + " ");
-            for (int coluna = 0; coluna < tamanho; coluna++) {
+            for (coluna = 0; coluna < tamanho; coluna++) {
                 char caracter = matriz[linha][coluna];
                 if (caracter == 0) {
                     System.out.print("░");
@@ -32,6 +35,6 @@ public class Visualizador {
 
         }
         System.out.print("\n ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
-        System.out.println("         Jogada (linha,coluna) -> @\n");
+        System.out.println("         Jogada (linha,coluna) -> \n");
     }
 }

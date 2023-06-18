@@ -67,11 +67,11 @@ public class Tabuleiro {
     }
 
     private void posicaoJogada(Cordenada cordenada, char resultado) {
-        matriz[cordenada.getLinha()][cordenada.getColuna()] = resultado; // marca a jogada na matri
+        matriz[cordenada.getLinha()][cordenada.getColuna()] = resultado; // marca a jogada na matriz
         // copilot nao colocou o ; na linha de cima isso fui eu
     }
 
-    public void setPosicao(Cordenada cordenada, char resultado) {
+    public void setPosicao(Cordenada cordenada) {
         this.cordenada = cordenada;
     }
 
@@ -86,4 +86,5 @@ public class Tabuleiro {
         return numeroEmbarcacoes == numeroEmbarcacoesDestruidas;
 
     }
+
 }

@@ -27,10 +27,13 @@ public class Cordenada implements Serializable {
 		return this.coluna;
 	}
 
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (!(o instanceof Cordenada cordenada)) return false;
+		if (!(o instanceof Cordenada cordenada)) {
+			return false;
+		}
 
 		if (getLinha() != cordenada.getLinha()) return false;
 		return getColuna() == cordenada.getColuna();

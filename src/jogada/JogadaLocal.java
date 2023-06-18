@@ -11,6 +11,6 @@ public class JogadaLocal extends Jogada {
 		int linha = scanner.nextInt();
 		System.out.print("Digite a coluna da jogada: ");
 		int coluna = scanner.nextInt();
-		return new Cordenada(0, 0);
+		return new Cordenada(linha, coluna);
 	}
 }
