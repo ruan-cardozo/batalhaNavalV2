@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class Tabuleiro {
     public static final char ACERTOU = 'X';
-    public static final char NAO_ACERTOU = 'E';
+    public static final char NAO_ACERTOU = 'A';
     private char[][] matriz;
     private int tamanho;
     private Cordenada cordenada;

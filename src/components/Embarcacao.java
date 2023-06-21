@@ -82,6 +82,8 @@ public abstract class Embarcacao {
             if( cordenadaEmbarcacao.equals(cordenada) ) {
                 atingir();
                 return true;
+            } else {
+
             }
         }
         return false;

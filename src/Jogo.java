@@ -1,4 +1,5 @@
 import components.Embarcacao;
+import components.Submarino;
 import components.Tabuleiro;
 import components.Cordenada;
 import jogada.Jogada;
@@ -17,8 +18,14 @@ public class Jogo {
 	private List<Embarcacao> embarcacoes;
 	private Tabuleiro tabuleiro = new Tabuleiro(10);
 
+	public Jogo() {
+		embarcacoes = {  // popular embarcacoes com as embarcaoes vazias
+				new Submarino(), new Submarino(),
+		};
+	}
+
 	public void loader() {
-		final String FILE = "C://Users//RUAND//projetos//Faculdade//batalhanaval//src//posicoes.csv";
+		final String FILE = "C://Users//guilherme.machado//IdeaProjects//batalhanaval//src//posicoes.csv";
 		LOG.info("Iniciando leitura do arquivo");
 		this.guardarEmbarcacoe( CarregadorEmbarcacoes.carregar(FILE) );
 		LOG.info("Finalizando leitura arquivo");
@@ -26,6 +33,17 @@ public class Jogo {
 
 	private void guardarEmbarcacoe(List<Embarcacao> carregar) {
 		this.embarcacoes = carregar;
+	}
+
+	private void posicionar() {
+
+		for (Embarcacao embarcacao : embarcacoes) {
+			// pedir coordenadas da embarcacao (Scanner)
+			embarcacao.setCoordenadas(coordenadas);
+			tabuleiro.adicionarEmbarcacao(embarcacao);
+			LOG.info(embarcacao.getTipo());
+			// atualizar tabuleiro na tela
+		}
 	}
 
 	private void criarTabuleiro() {
@@ -95,9 +113,11 @@ public class Jogo {
 	}
 
 	public static void main(String[] args) {
+
 		Jogo game = new Jogo();
 		game.loader();
 		game.criarTabuleiro();
+		game.posionar();
 		game.jogar();
 		game.terminar();
 	}
