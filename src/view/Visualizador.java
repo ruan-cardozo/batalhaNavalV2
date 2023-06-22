@@ -13,6 +13,7 @@ public class Visualizador {
 		int tamanho = tabuleiro.getTamanho();
 		char[][] matriz = tabuleiro.getMatriz();
 		System.out.print("\n ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
+
 		String pontuacaoText = "PLACAR " + tabuleiro.getPontuacao();
 		int espacosEsquerda = (30 - pontuacaoText.length()) / 2;
 		int espacosDireita = 30 - espacosEsquerda - pontuacaoText.length();

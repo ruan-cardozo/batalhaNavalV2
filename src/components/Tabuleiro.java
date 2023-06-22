@@ -54,6 +54,14 @@ public class Tabuleiro {
 
     }
 
+ /*   public void posicaoValida(linha, coluna) {
+        int tamanhoMatriz = matriz.length;
+
+        if (linha < 0 || linha >= tamanhoMatriz) {
+            throw new IllegalArgumentException("Jogada inválida, linha fora do tabuleiro");
+        }
+    }*/
+
     public char verificarJogada(Cordenada cordenada) {
         char acertou = NAO_ACERTOU;
         for (Embarcacao embarcacao : embarcacoes) {
@@ -79,7 +87,7 @@ public class Tabuleiro {
         int numeroEmbarcacoes = embarcacoes.size();
         int numeroEmbarcacoesDestruidas = 0;
         for (Embarcacao embarcacao : embarcacoes) {
-            if(embarcacao.foiDestruida()) {
+            if(embarcacao.estaDestruido(cordenada)) {
                 numeroEmbarcacoesDestruidas++;
             }
         }
@@ -87,4 +95,7 @@ public class Tabuleiro {
 
     }
 
+    public char posicaoAtacada(int linha, int coluna) {
+        return matriz[linha][coluna];
+    }
 }

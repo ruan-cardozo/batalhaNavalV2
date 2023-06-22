@@ -1,5 +1,4 @@
 import components.Embarcacao;
-import components.Submarino;
 import components.Tabuleiro;
 import components.Cordenada;
 import jogada.Jogada;
@@ -18,14 +17,8 @@ public class Jogo {
 	private List<Embarcacao> embarcacoes;
 	private Tabuleiro tabuleiro = new Tabuleiro(10);
 
-	public Jogo() {
-		embarcacoes = {  // popular embarcacoes com as embarcaoes vazias
-				new Submarino(), new Submarino(),
-		};
-	}
-
 	public void loader() {
-		final String FILE = "C://Users//guilherme.machado//IdeaProjects//batalhanaval//src//posicoes.csv";
+		final String FILE = "C://Users//RUAND//projetos//Faculdade//batalhanaval//src//posicoes.csv";
 		LOG.info("Iniciando leitura do arquivo");
 		this.guardarEmbarcacoe( CarregadorEmbarcacoes.carregar(FILE) );
 		LOG.info("Finalizando leitura arquivo");
@@ -34,19 +27,7 @@ public class Jogo {
 	private void guardarEmbarcacoe(List<Embarcacao> carregar) {
 		this.embarcacoes = carregar;
 	}
-
-	private void posicionar() {
-
-		for (Embarcacao embarcacao : embarcacoes) {
-			// pedir coordenadas da embarcacao (Scanner)
-			embarcacao.setCoordenadas(coordenadas);
-			tabuleiro.adicionarEmbarcacao(embarcacao);
-			LOG.info(embarcacao.getTipo());
-			// atualizar tabuleiro na tela
-		}
-	}
-
-	private void criarTabuleiro() {
+		private void criarTabuleiro() {
 		for (Embarcacao posicao : embarcacoes) {
 			tabuleiro.adicionarEmbarcacao(posicao);
 			LOG.info(posicao.getTipo());
@@ -64,31 +45,20 @@ public class Jogo {
 		System.out.println("Fim de jogo!");
 	}
 
-	private boolean jogar(Cordenada cordenada) {
-		if (posicaoValida(cordenada)) {
-			tabuleiro.verificarJogada(cordenada);
-			visualizar();
-		} else {
-			System.out.println("Jogada inválida, tente novamente.");
-			return  false;
-		}
-		return this.estaTerminado();
-	}
-
-	private boolean posicaoValida(Cordenada cordenada) {
-		int linha = cordenada.getLinha();
-		int coluna = cordenada.getColuna();
-		if (linha < 0 || linha >= tabuleiro.getTamanho() || coluna < 0 || coluna >= tabuleiro.getTamanho()) {
-			System.out.println("Jogada inválida, tente novamente.");
-			return true;
-		}
-		return false;
-	}
 
 	private void jogar() {
 		while (! this.estaTerminado()) {
 			this.visualizar();
 			tabuleiro.verificarJogada(solicitarJogada());
+
+		}
+	}
+
+	public void posicaoAtacada(int linha, int coluna) {
+		if(tabuleiro.posicaoAtacada(linha, coluna) == 'X' || tabuleiro.posicaoAtacada(linha, coluna) == 'A') {
+			System.out.println("Você já atacou essa posição");
+		} else {
+			System.out.println("Você acertou um barco");
 		}
 	}
 
@@ -117,7 +87,6 @@ public class Jogo {
 		Jogo game = new Jogo();
 		game.loader();
 		game.criarTabuleiro();
-		game.posionar();
 		game.jogar();
 		game.terminar();
 	}

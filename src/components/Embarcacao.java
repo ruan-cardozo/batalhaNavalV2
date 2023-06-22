@@ -7,7 +7,6 @@ public abstract class Embarcacao {
     private  Cordenada cordenada;
     protected char caracter;
 
-
     LinkedList<Cordenada> cordenadas = new LinkedList<Cordenada>();
 
     protected int tamanho;
@@ -16,12 +15,28 @@ public abstract class Embarcacao {
 
     protected int pontuacao;
 
+    private int contador;
+
+    private boolean destruido;
+
+    public boolean estaDestruido(Cordenada cordenada) {
+        if (cordenadas.contains(cordenada)) {
+            atingir();
+            return true;
+        }
+        return false;
+    }
+
     public int getTamanho() {
         return tamanho;
     }
 
     private void atingir() {
-        pontuacao += 10;
+        contador += 1;
+
+        if (contador == getTamanho()) {
+            destruido = true;
+        }
     }
     public int getPontuacao() {
         return pontuacao;
@@ -33,6 +48,8 @@ public abstract class Embarcacao {
         this.caracter = caracter;
         this.tamanho = tamanho;
         this.direcao = direcao;
+        this.destruido = false;
+        this.contador = 0;
     }
 
     public Embarcacao(String tipo, Cordenada cordenada, char caracter) {
@@ -62,11 +79,6 @@ public abstract class Embarcacao {
          return this.direcao;
     }
 
-    public boolean foiDestruida() {
-         // fazer a logica para saber se foi destruida
-        return false;
-    }
-
     public void adicionarCordenada(Cordenada cordenada) {
         this.cordenadas.add(cordenada);
     }
@@ -82,8 +94,6 @@ public abstract class Embarcacao {
             if( cordenadaEmbarcacao.equals(cordenada) ) {
                 atingir();
                 return true;
-            } else {
-
             }
         }
         return false;
