@@ -1,4 +1,4 @@
-package Server;
+package server;
 import jogada.JogadaLocal;
 import jogada.JogadaRemota;
 import java.io.BufferedReader;
