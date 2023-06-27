@@ -7,6 +7,7 @@ import jogada.JogadaRemota;
 import util.CarregadorEmbarcacoes;
 import view.Visualizador;
 
+import java.net.Socket;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Logger;
@@ -47,7 +48,7 @@ public class Jogo {
 
 
 	private void jogar() {
-		while (! this.estaTerminado()) {
+		while (!this.estaTerminado()) {
 			this.visualizar();
 			tabuleiro.verificarJogada(solicitarJogada());
 
@@ -58,7 +59,7 @@ public class Jogo {
 		if(tabuleiro.posicaoAtacada(linha, coluna) == 'X' || tabuleiro.posicaoAtacada(linha, coluna) == 'A') {
 			System.out.println("Você já atacou essa posição");
 		} else {
-			System.out.println("Você acertou um barco");
+			tabuleiro.verificarJogada(new Cordenada(linha, coluna));
 		}
 	}
 
@@ -67,7 +68,7 @@ public class Jogo {
 		if(LOCAL) {
 			jogada = new JogadaLocal();
 		} else {
-			jogada = new JogadaRemota();
+			jogada = new JogadaRemota(new Socket());
 		}
 		return jogada.solicitarJogada();
 

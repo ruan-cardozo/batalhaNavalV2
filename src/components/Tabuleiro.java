@@ -26,7 +26,7 @@ public class Tabuleiro {
             vertical = 1;
         }
 
-        int tamanho = embarcacao.getTamanho();
+        int tamanho = embarcacao.getTamanho(embarcacao.getTipo());
         for (int i = 0; i < tamanho; i++) {
             int linhaInicial = embarcacao.getCordenada().getLinha();
             int colunaInicial = embarcacao.getCordenada().getColuna();

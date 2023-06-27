@@ -27,14 +27,13 @@ public abstract class Embarcacao {
         return false;
     }
 
-    public int getTamanho() {
+    public int getTamanho(String tipo) {
         return tamanho;
     }
 
     private void atingir() {
         contador += 1;
-
-        if (contador == getTamanho()) {
+        if (contador == getTamanho(getTipo())) {
             destruido = true;
         }
     }
