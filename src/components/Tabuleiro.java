@@ -2,6 +2,8 @@ package components;
 
 import java.util.LinkedList;
 
+import static java.lang.System.out;
+
 public class Tabuleiro {
     public static final char ACERTOU = 'X';
     public static final char NAO_ACERTOU = 'A';
@@ -19,7 +21,7 @@ public class Tabuleiro {
         char caracter = embarcacao.getCaracter();
         int horizontal = 0;
         int vertical = 0;
-        System.out.println("DIRECAO "  + embarcacao.getDirecao());
+        out.println("DIRECAO "  + embarcacao.getDirecao());
         if(embarcacao.getDirecao() == 'H') {
             horizontal = 1;
         } else {
@@ -68,6 +70,7 @@ public class Tabuleiro {
         char acertou = NAO_ACERTOU;
         for (Embarcacao embarcacao : embarcacoes) {
             if(embarcacao.foiAcertada(cordenada)) {
+                out.println("Acertou um navio!");
                 acertou = ACERTOU;
                 break; // para o loop
             }

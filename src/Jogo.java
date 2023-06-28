@@ -59,6 +59,7 @@ public class Jogo {
 			this.visualizar();
 			tabuleiro.verificarJogada(solicitarJogada());
 
+
 		}
 	}
 
@@ -93,7 +94,8 @@ public class Jogo {
 	public static void main(String[] args) {
 
 		Jogo game = new Jogo();
-		game.loaderUsuario();
+		game.loader();
+		//game.loaderUsuario();
 		game.criarTabuleiro();
 		game.jogar();
 		game.terminar();

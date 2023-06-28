@@ -39,3 +39,8 @@ ilhas possuem linha inicial e
 coluna inicial e um caracter que sera 
 usado futuramente.
 */ 
+
+Arrumar bug de quando todas as embarcações são atingidas, o jogo não acaba;
+arrumar bug do placar;
+arrumar para visualizar toda vez que o usuário fazer um posicionamento de embarcação;
+Copilot eu te amo;
