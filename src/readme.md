@@ -40,10 +40,10 @@ coluna inicial e um caracter que sera
 usado futuramente.
 
 Arrumar bug de quando todas as embarcações são atingidas, o jogo não acaba//Corrigido!!!
-Arrumar bug do placar;//Em desenvolvimento;
+Arrumar bug do placar;"conversar com glauco quinta feira";
 Arrumar para visualizar toda vez que o usuário fazer um posicionamento de embarcação;//Em desenvolvimento;
 Implementar escolha de posicionamento vertical e horizontal;//Em desenvolvimento;
-Arrumar bug de quando o usuário digitar uma posição que já foi atingida, o jogo não conta como jogada e pede pra jogar novamente;
-Arrumar bug de quando o usuário digitar uma posição que não existe, o jogo não conta como jogada e pede pra jogar novamente;
+Arrumar bug de quando o usuário digitar uma posição que já foi atingida, o jogo não conta como jogada e pede pra jogar novamente;//Corrigida
+Arrumar bug de quando o usuário digitar uma posição que não existe, o jogo não conta como jogada e pede pra jogar novamente;//"Convesar com Glauco"
 
 

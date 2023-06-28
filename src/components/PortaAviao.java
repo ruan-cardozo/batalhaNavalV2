@@ -1,8 +1,8 @@
 package components;
 
 class PortaAviao extends Embarcacao {
-	PortaAviao(Cordenada cordenadaInicial) {
-		super("PortaAvião", cordenadaInicial, 'P');
+	PortaAviao(Cordenada cordenada) {
+		super("PortaAvião", cordenada, 'P');
 		tamanho = 5;
 	}
 }

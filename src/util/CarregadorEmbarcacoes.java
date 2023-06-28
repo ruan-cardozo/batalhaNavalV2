@@ -3,6 +3,8 @@ package util;
 import components.Cordenada;
 import components.Embarcacao;
 import components.EmbacacaoFactory;
+import components.Tabuleiro;
+import view.Visualizador;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -46,7 +48,6 @@ public class CarregadorEmbarcacoes {
 
 		return embarcacoes;
 	}
-
 	public static List<Embarcacao> loaderUsuario() {
 		String[] nomes = {"Submarino", "Submarino", "Submarino", "Submarino", "ContraTorpedeiro", "ContraTorpedeiro", "ContraTorpedeiro", "NavioTanque", "NavioTanque", "PortaAvião"};
 		int contador = 0;

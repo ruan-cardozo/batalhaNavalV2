@@ -27,7 +27,7 @@ public abstract class Embarcacao {
 		return tamanho;
 	}
 
-	private void atingir() {
+	void atingir() {
 		contador += 1;
 		if (contador == getTamanho(getTipo())) {
 			destruido = true;
@@ -36,9 +36,7 @@ public abstract class Embarcacao {
 
 	public int getPontuacao() {
 		return pontuacao++;
-
 	}
-
 	public Embarcacao(String tipo, Cordenada cordenada, char caracter, int tamanho, char direcao) {
 		this.tipo = tipo;
 		this.cordenada = cordenada;

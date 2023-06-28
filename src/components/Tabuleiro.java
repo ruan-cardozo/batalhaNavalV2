@@ -8,12 +8,15 @@ public class Tabuleiro {
 	public static final char ACERTOU = 'X';
 	public static final char NAO_ACERTOU = 'A';
 	private char[][] matriz;
+
+	private boolean[][] matrizJogadas;
 	private int tamanho;
 	private Cordenada cordenada;
 	private LinkedList<Embarcacao> embarcacoes = new LinkedList<Embarcacao>();
 
 	public Tabuleiro(int tamanho) {
 		this.matriz = new char[tamanho][tamanho];
+		this.matrizJogadas = new boolean[tamanho][tamanho];
 		this.tamanho = tamanho;
 	}
 
@@ -66,18 +69,22 @@ public class Tabuleiro {
     }*/
 
 	public char verificarJogada(Cordenada cordenada) {
+
+		if(matrizJogadas[cordenada.getLinha()][cordenada.getColuna()]) {
+			System.out.println("Jogada já realizada ->"+ " " + "Linha: " + cordenada.getLinha() + " " +"" + "Coluna: "+ cordenada.getColuna());
+			return NAO_ACERTOU;
+		}
+		matrizJogadas[cordenada.getLinha()][cordenada.getColuna()] = true;
+
 		char acertou = NAO_ACERTOU;
 		for (Embarcacao embarcacao : embarcacoes) {
-			if (embarcacao.foiAcertada(cordenada)) {
+			if(embarcacao.foiAcertada(cordenada)) {
+				System.out.println("Acertou um navio!");
 				acertou = ACERTOU;
-			}
-			if (acertou == ACERTOU) {
-				System.out.println("Acertou uma embarcação");
-			} else {
-				System.out.println("Não acertou uma embarcação");
-				// para o loop
-			}
-			break;
+				break; // para o loop
+			} /*else {
+				System.out.println("Não acertou nenhum navio!");
+			}*/ //bug de toda vez que acertar alguma coisa ele vai printar isso independente de ter acertado ou não
 		}
 		posicaoJogada(cordenada, acertou);
 		return acertou;
