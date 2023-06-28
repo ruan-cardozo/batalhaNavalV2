@@ -19,12 +19,8 @@ public abstract class Embarcacao {
 
     private boolean destruido;
 
-    public boolean estaDestruido(Cordenada cordenada) {
-        if (cordenadas.contains(cordenada)) {
-            atingir();
-            return true;
-        }
-        return false;
+    public boolean estaDestruido() {
+        return destruido;
     }
 
     public int getTamanho(String tipo) {

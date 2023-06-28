@@ -92,7 +92,7 @@ public class Tabuleiro {
         int numeroEmbarcacoes = embarcacoes.size();
         int numeroEmbarcacoesDestruidas = 0;
         for (Embarcacao embarcacao : embarcacoes) {
-            if(embarcacao.estaDestruido(cordenada)) {
+            if(embarcacao.estaDestruido()) {
                 numeroEmbarcacoesDestruidas++;
             }
         }
