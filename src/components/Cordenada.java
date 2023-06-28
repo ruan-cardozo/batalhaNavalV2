@@ -1,4 +1,5 @@
 package components;
+
 import java.io.Serializable;
 
 public class Cordenada implements Serializable {

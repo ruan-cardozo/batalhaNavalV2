@@ -14,6 +14,6 @@ public class JogadaRemota extends Jogada {
 	}
 
 	public Cordenada solicitarJogada() {
-		return  new Cordenada(0,0); // substituir por uma jogada remota
+		return new Cordenada(0, 0); // substituir por uma jogada remota
 	}
 }

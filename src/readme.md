@@ -38,9 +38,12 @@ qual cada classe filha
 ilhas possuem linha inicial e
 coluna inicial e um caracter que sera 
 usado futuramente.
-*/ 
 
-Arrumar bug de quando todas as embarcações são atingidas, o jogo não acaba;
-arrumar bug do placar;
-arrumar para visualizar toda vez que o usuário fazer um posicionamento de embarcação;
-Copilot eu te amo;
+Arrumar bug de quando todas as embarcações são atingidas, o jogo não acaba//Corrigido!!!
+Arrumar bug do placar;//Em desenvolvimento;
+Arrumar para visualizar toda vez que o usuário fazer um posicionamento de embarcação;//Em desenvolvimento;
+Implementar escolha de posicionamento vertical e horizontal;//Em desenvolvimento;
+Arrumar bug de quando o usuário digitar uma posição que já foi atingida, o jogo não conta como jogada e pede pra jogar novamente;
+Arrumar bug de quando o usuário digitar uma posição que não existe, o jogo não conta como jogada e pede pra jogar novamente;
+
+

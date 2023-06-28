@@ -21,13 +21,13 @@ public class Jogo {
 	public void loader() {
 		final String FILE = "C://Users//RUAND//projetos//Faculdade//batalhanaval//src//posicoes.csv";
 		//LOG.info("Iniciando leitura do arquivo");
-		this.guardarEmbarcacoe( CarregadorEmbarcacoes.carregar(FILE) );
+		this.guardarEmbarcacoe(CarregadorEmbarcacoes.carregar(FILE));
 		//LOG.info("Finalizando leitura arquivo");
 	}
 
 	public void loaderUsuario() {
 		//LOG.info("Iniciando leitura do arquivo");
-		this.guardarEmbarcacoe( CarregadorEmbarcacoes.loaderUsuario() );
+		this.guardarEmbarcacoe(CarregadorEmbarcacoes.loaderUsuario());
 		//LOG.info("Finalizando leitura arquivo");
 
 	}
@@ -35,7 +35,8 @@ public class Jogo {
 	private void guardarEmbarcacoe(List<Embarcacao> carregar) {
 		this.embarcacoes = carregar;
 	}
-		private void criarTabuleiro() {
+
+	private void criarTabuleiro() {
 		for (Embarcacao posicao : embarcacoes) {
 			tabuleiro.adicionarEmbarcacao(posicao);
 			//LOG.info(posicao.getTipo());
@@ -59,12 +60,11 @@ public class Jogo {
 			this.visualizar();
 			tabuleiro.verificarJogada(solicitarJogada());
 
-
 		}
 	}
 
 	public void posicaoAtacada(int linha, int coluna) {
-		if(tabuleiro.posicaoAtacada(linha, coluna) == 'X' || tabuleiro.posicaoAtacada(linha, coluna) == 'A') {
+		if (tabuleiro.posicaoAtacada(linha, coluna) == 'X' || tabuleiro.posicaoAtacada(linha, coluna) == 'A') {
 			System.out.println("Você já atacou essa posição");
 		} else {
 			tabuleiro.verificarJogada(new Cordenada(linha, coluna));
@@ -72,8 +72,8 @@ public class Jogo {
 	}
 
 	private Cordenada solicitarJogada() {
-		Jogada jogada ;
-		if(LOCAL) {
+		Jogada jogada;
+		if (LOCAL) {
 			jogada = new JogadaLocal();
 		} else {
 			jogada = new JogadaRemota(new Socket());
