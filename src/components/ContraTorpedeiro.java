@@ -5,4 +5,6 @@ class ContraTorpedeiro extends Embarcacao {
 		super("ContraTorpedeiro", cordenada, 'C');
 		tamanho = 4;
 	}
+
+
 }

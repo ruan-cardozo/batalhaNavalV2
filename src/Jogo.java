@@ -20,9 +20,16 @@ public class Jogo {
 
 	public void loader() {
 		final String FILE = "C://Users//RUAND//projetos//Faculdade//batalhanaval//src//posicoes.csv";
-		LOG.info("Iniciando leitura do arquivo");
+		//LOG.info("Iniciando leitura do arquivo");
 		this.guardarEmbarcacoe( CarregadorEmbarcacoes.carregar(FILE) );
-		LOG.info("Finalizando leitura arquivo");
+		//LOG.info("Finalizando leitura arquivo");
+	}
+
+	public void loaderUsuario() {
+		//LOG.info("Iniciando leitura do arquivo");
+		this.guardarEmbarcacoe( CarregadorEmbarcacoes.loaderUsuario() );
+		//LOG.info("Finalizando leitura arquivo");
+
 	}
 
 	private void guardarEmbarcacoe(List<Embarcacao> carregar) {
@@ -31,7 +38,7 @@ public class Jogo {
 		private void criarTabuleiro() {
 		for (Embarcacao posicao : embarcacoes) {
 			tabuleiro.adicionarEmbarcacao(posicao);
-			LOG.info(posicao.getTipo());
+			//LOG.info(posicao.getTipo());
 		}
 	}
 
@@ -86,7 +93,7 @@ public class Jogo {
 	public static void main(String[] args) {
 
 		Jogo game = new Jogo();
-		game.loader();
+		game.loaderUsuario();
 		game.criarTabuleiro();
 		game.jogar();
 		game.terminar();
