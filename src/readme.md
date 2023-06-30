@@ -34,16 +34,27 @@ O programa deve seguir os principios do Solid e existir
 um tipo de classe Abstrata chamada Embarcacao do
 qual cada classe filha
 (PortaAvião (P), NavioTanque (N), ContraTorpedeiro 
-(C),Submarino (S)) deve herdar. As classes f
-ilhas possuem linha inicial e
+(C),Submarino (S)) deve herdar. As classes filhas possuem linha inicial e
 coluna inicial e um caracter que sera 
 usado futuramente.
 
 Arrumar bug de quando todas as embarcações são atingidas, o jogo não acaba//Corrigido!!!
-Arrumar bug do placar;"conversar com glauco quinta feira";
-Arrumar para visualizar toda vez que o usuário fazer um posicionamento de embarcação;//Em desenvolvimento;
-Implementar escolha de posicionamento vertical e horizontal;//Em desenvolvimento;
-Arrumar bug de quando o usuário digitar uma posição que já foi atingida, o jogo não conta como jogada e pede pra jogar novamente;//Corrigida
-Arrumar bug de quando o usuário digitar uma posição que não existe, o jogo não conta como jogada e pede pra jogar novamente;//"Convesar com Glauco"
 
+Arrumar bug do placar;
+
+Arrumar para visualizar toda vez que o usuário fazer um posicionamento de embarcação;//Em desenvolvimento;
+
+Implementar escolha de posicionamento vertical e horizontal;//Em desenvolvimento;
+
+Arrumar bug de quando o usuário digitar uma posição que já foi atingida, o jogo não conta como jogada e pede pra jogar novamente;//Corrigida
+
+
+Arrumar bug de quando o usuário digitar uma posição que não existe, o jogo não conta como jogada e pede pra jogar novamente;
+
+Bugs
+    1. Posicionar embarcacao em cima de outra -> acaba o jogo
+    2. Jogar fora do tabuleiro -> acaba o jogo
+    3. Jogar na na mesma posicao jogada -> soma placar
+    4. Pode posicionar uma embarcacao uma do lado da outra sem espaco entre elas -> joga bugado...
+    5. 
 

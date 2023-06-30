@@ -1,11 +1,32 @@
 package jogada;
-
 import components.Cordenada;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.Scanner;
 
-public class JogadaLocal extends Jogada {
-	public Cordenada solicitarJogada() {
+public class Cliente extends Rede {
+
+	public Cliente (String ip, int port) {
+		super(ip, port);
+	}
+
+	public Cliente() {
+		super();
+	}
+
+	@Override
+	public void conectarNoServidor() throws IOException {
+		clienteSocket = new Socket(ip, port);
+		out = new PrintWriter(clienteSocket.getOutputStream(), true);
+		in = new BufferedReader(new InputStreamReader(clienteSocket.getInputStream()));
+	}
+
+	public Cordenada jogar() {
 		Scanner scanner = new Scanner(System.in);
 
 		do {
@@ -33,8 +54,14 @@ public class JogadaLocal extends Jogada {
 					scanner.close();
 				}
 			}
-			return new Cordenada(linha, coluna);
+			Cordenada c = new Cordenada(linha, coluna);
+			this.enviar(c);
+			return c;
 		} while (true);
 
+	}
+
+	private void enviar(Cordenada c) {
+		// logica para enviar para o servidor
 	}
 }

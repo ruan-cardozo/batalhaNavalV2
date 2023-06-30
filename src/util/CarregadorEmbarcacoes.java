@@ -53,16 +53,18 @@ public class CarregadorEmbarcacoes {
 		int contador = 0;
 		int linhaInicial = 0;
 		int colunaInicial = 0;
+
 		List<Embarcacao> embarcacoes = new ArrayList<>();
 
-		for (String nome : nomes) {
-			System.out.println("Posicione as embarcações: " + nome);
-			Scanner scanner = new Scanner(System.in);
-			System.out.println("Digite a linha inicial: ");
-			linhaInicial = scanner.nextInt();
-			System.out.println("Digite a coluna inicial: ");
-			colunaInicial = scanner.nextInt();
-			//System.out.println("Digite a direção: ");
+			for (String nome : nomes) {
+				System.out.println("Posicione as embarcações: " + nome);
+				Scanner scanner = new Scanner(System.in);
+				System.out.println("Digite a linha inicial: ");
+				linhaInicial = scanner.nextInt();
+				System.out.println("Digite a coluna inicial: ");
+				colunaInicial = scanner.nextInt();
+				System.out.println("Digite a direção: ");
+
 			Cordenada c = new Cordenada(linhaInicial, colunaInicial);
 			Embarcacao embarcacao = EmbacacaoFactory.criar(nome, c);
 			if (embarcacao != null) {
