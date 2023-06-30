@@ -1,13 +1,11 @@
-import Rede.Rede;
 import components.Embarcacao;
 import components.Tabuleiro;
 import components.Cordenada;
-import Rede.Jogada;
-import Rede.Cliente;
-import Rede.Servidor;
+import Jogada.Jogada;
+import Jogada.JogadaLocal;
+import Jogada.JogadaRemota;
 import util.CarregadorEmbarcacoes;
 import view.Visualizador;
-
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Logger;
@@ -56,10 +54,9 @@ public class Jogo {
 
 
 	private void jogar() {
-		while (!this.estaTerminado()) {
+		while (! this.estaTerminado()) {
 			this.visualizar();
 			tabuleiro.verificarJogada(solicitarJogada());
-
 		}
 	}
 
@@ -74,13 +71,11 @@ public class Jogo {
 	private Cordenada solicitarJogada() {
 		Jogada jogada;
 		if (LOCAL) {
-			jogada = new Cliente();
-			jogada.jogar();
+			jogada = new JogadaLocal();
 		} else {
-			jogada = new Servidor();
-			jogada.jogar();
+			jogada = new JogadaRemota();
 		}
-		return null;
+		return jogada.solicitarJogada();
 	}
 
 	private boolean estaTerminado() {
@@ -97,15 +92,15 @@ public class Jogo {
 
 		Jogo game = new Jogo();
 
-		if(args.length == 2) { // cliente ip e porta
-			Jogo = new Jogo(args[0], Integer.parseInt(args[1]));
-		} else if(args.length == 1) { // servidor porta
-			Jogo = new Jogo(Integer.parseInt(args[0]));
-		} else {
-			jogo.run();
-			System.out.println("Digite cliente ip e porta ou servidor porta");
-			System.exit(0);
-		}
+//		if(args.length == 2) { // cliente ip e porta
+//			Jogo = new Jogo(args[0], Integer.parseInt(args[1]));
+//		} else if(args.length == 1) { // servidor porta
+//			Jogo = new Jogo(Integer.parseInt(args[0]));
+//		} else {
+//			jogo.run();
+//			System.out.println("Digite cliente ip e porta ou servidor porta");
+//			System.exit(0);
+//		}
 
 		String file = "C://Users//RUAND//projetos//Faculdade//batalhanaval//src//";
 		System.out.println("Digite cliente ou servidor para o arquivo de configuracao do jogo");
@@ -113,7 +108,7 @@ public class Jogo {
 		String nome = scanner.nextLine();
 
 		game.loader(file + nome + ".csv");
-		// game.loaderUsuario();
+		//game.loaderUsuario();
 		game.criarTabuleiro();
 		game.jogar();
 		game.terminar();

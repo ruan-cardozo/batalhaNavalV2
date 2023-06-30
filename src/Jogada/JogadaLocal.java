@@ -1,31 +1,24 @@
-package Rede;
+package Jogada;
 import components.Cordenada;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
 import java.util.Scanner;
 
-public class Cliente extends Rede {
+public class JogadaLocal extends Jogada {
+//	public Cliente (String ip, int port) {
+//		super(ip, port);
+//	}
 
-	public Cliente (String ip, int port) {
-		super(ip, port);
-	}
+//	public Cliente() {
+//		super();
+//	}
 
-	public Cliente() {
-		super();
-	}
-
-	@Override
-	public void conectarNoServidor() throws IOException {
-		clienteSocket = new Socket(ip, port);
-		out = new PrintWriter(clienteSocket.getOutputStream(), true);
-		in = new BufferedReader(new InputStreamReader(clienteSocket.getInputStream()));
-	}
-
-	public Cordenada jogar() {
+//	@Override
+//	public void conectarNoServidor() throws IOException {
+//		clienteSocket = new Socket(ip, port);
+//		out = new PrintWriter(clienteSocket.getOutputStream(), true);
+//		in = new BufferedReader(new InputStreamReader(clienteSocket.getInputStream()));
+//	}
+	public Cordenada solicitarJogada() {
 		Scanner scanner = new Scanner(System.in);
 
 		do {
@@ -53,14 +46,14 @@ public class Cliente extends Rede {
 					scanner.close();
 				}
 			}
-			Cordenada c = new Cordenada(linha, coluna);
-			this.enviar(c);
-			return c;
+			return new Cordenada(linha, coluna);
+//			this.enviar(c);
+//			return c;
 		} while (true);
 
 	}
 
-	private void enviar(Cordenada c) {
-		// logica para enviar para o servidor
-	}
+//	private void enviar(Cordenada c) {
+//		// logica para enviar para o servidor
+//	}
 }
