@@ -1,9 +1,10 @@
+import Rede.Rede;
 import components.Embarcacao;
 import components.Tabuleiro;
 import components.Cordenada;
-import jogada.Jogada;
-import jogada.Cliente;
-import jogada.Servidor;
+import Rede.Jogada;
+import Rede.Cliente;
+import Rede.Servidor;
 import util.CarregadorEmbarcacoes;
 import view.Visualizador;
 
@@ -95,6 +96,16 @@ public class Jogo {
 
 
 		Jogo game = new Jogo();
+
+		if(args.length == 2) { // cliente ip e porta
+			Jogo = new Jogo(args[0], Integer.parseInt(args[1]));
+		} else if(args.length == 1) { // servidor porta
+			Jogo = new Jogo(Integer.parseInt(args[0]));
+		} else {
+			jogo.run();
+			System.out.println("Digite cliente ip e porta ou servidor porta");
+			System.exit(0);
+		}
 
 		String file = "C://Users//RUAND//projetos//Faculdade//batalhanaval//src//";
 		System.out.println("Digite cliente ou servidor para o arquivo de configuracao do jogo");

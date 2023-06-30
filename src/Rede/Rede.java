@@ -1,4 +1,4 @@
-package jogada;
+package Rede;
 
 import java.io.BufferedReader;
 import java.io.IOException;

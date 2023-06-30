@@ -46,15 +46,15 @@ Arrumar para visualizar toda vez que o usuário fazer um posicionamento de embar
 
 Implementar escolha de posicionamento vertical e horizontal;//Em desenvolvimento;
 
-Arrumar bug de quando o usuário digitar uma posição que já foi atingida, o jogo não conta como jogada e pede pra jogar novamente;//Corrigida
+Arrumar bug de quando o usuário digitar uma posição que já foi atingida, o jogo não conta como Rede e pede pra jogar novamente;//Corrigida
 
 
-Arrumar bug de quando o usuário digitar uma posição que não existe, o jogo não conta como jogada e pede pra jogar novamente;
+Arrumar bug de quando o usuário digitar uma posição que não existe, o jogo não conta como Rede e pede pra jogar novamente;
 
 Bugs
     1. Posicionar embarcacao em cima de outra -> acaba o jogo
     2. Jogar fora do tabuleiro -> acaba o jogo
-    3. Jogar na na mesma posicao jogada -> soma placar
+    3. Jogar na na mesma posicao Rede -> soma placar
     4. Pode posicionar uma embarcacao uma do lado da outra sem espaco entre elas -> joga bugado...
     5. 
 

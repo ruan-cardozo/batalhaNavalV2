@@ -1,4 +1,4 @@
-package jogada;
+package Rede;
 
 import components.Cordenada;
 
