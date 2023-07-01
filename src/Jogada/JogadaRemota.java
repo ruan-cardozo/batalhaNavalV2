@@ -1,47 +1,58 @@
 package Jogada;
 
 import components.Cordenada;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.Scanner;
+import components.Cordenada;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
 
+ public class JogadaRemota /*servidor*/ extends Jogada {
+	private ServerSocket serverSocket;
 
-//import components.Cordenada;
-//
-//import java.io.BufferedReader;
-//import java.io.IOException;
-//import java.io.InputStreamReader;
-//import java.io.PrintWriter;
-//import java.net.ServerSocket;
-//
- public class JogadaRemota extends Jogada {
-		public Cordenada solicitarJogada(){
-		//sockets
-			return new Cordenada(0, 0);
+	private Socket clientSocket;
+
+	private PrintWriter out;
+
+	private BufferedReader in;
+
+	public void inicar(int port) throws IOException {
+		serverSocket = new ServerSocket(port);
+		clientSocket = serverSocket.accept();
+		out = new PrintWriter(clientSocket.getOutputStream(), true);
+		in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+	}
+	public void parar() {
+		try {
+			in.close();
+			out.close();
+			clientSocket.close();
+			serverSocket.close();
+		} catch (IOException ex) {
+			System.out.println("Erro ao fechar a conexão.");
 		}
+	}
+
+	public void enviarJogada(Cordenada cordenada) {
+		out.println(cordenada);
+	}
+
+	public String receberJogada() throws IOException {
+		return in.readLine();
+	}
+
+
+	public Cordenada solicitarJogada(){
+		return new Cordenada(0,0);
+	}
  }
-//	private ServerSocket serverSocket;
-//
-//	public Servidor() {
-//		super(port);
-//	}
-//	@Override
-//	public void conectarNoServidor() throws IOException {
-//			serverSocket = new ServerSocket(port);
-//			clienteSocket = serverSocket.accept();
-//			out = new PrintWriter(clienteSocket.getOutputStream(), true);
-//			in = new BufferedReader(new InputStreamReader(clienteSocket.getInputStream()));
-//	}
-//
-//	@Override
-//	public void parar() throws IOException {
-//		super.parar();
-//		serverSocket.close();
-//	}
-//
-//	public Cordenada jogar() {
-//		// conectar no servidor remoto e receber a jogada que ele enviou
-//
-//		// logica para receber a jogado do inimigo
-//		return new Cordenada(0, 0);
-//		// substituir por uma jogada remota
-//	}
-//}

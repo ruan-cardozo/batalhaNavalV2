@@ -6,28 +6,24 @@ import Jogada.JogadaLocal;
 import Jogada.JogadaRemota;
 import util.CarregadorEmbarcacoes;
 import view.Visualizador;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Logger;
 
 public class Jogo {
-	private static final boolean LOCAL = true;
-	private static final Logger LOG = Logger.getAnonymousLogger();
 	private List<Embarcacao> embarcacoes;
 	private Tabuleiro tabuleiro = new Tabuleiro(10);
 
-	public void loader(String file) {
+	private JogadaRemota servidor;
 
-		//LOG.info("Iniciando leitura do arquivo");
+	private JogadaLocal cliente;
+
+	public void loader(String file) {
 		this.guardarEmbarcacoe(CarregadorEmbarcacoes.carregar(file));
-		//LOG.info("Finalizando leitura arquivo");
 	}
 
 	public void loaderUsuario() {
-		//LOG.info("Iniciando leitura do arquivo");
 		this.guardarEmbarcacoe(CarregadorEmbarcacoes.loaderUsuario());
-		//LOG.info("Finalizando leitura arquivo");
-
 	}
 
 	private void guardarEmbarcacoe(List<Embarcacao> carregar) {
@@ -37,7 +33,6 @@ public class Jogo {
 	private void criarTabuleiro() {
 		for (Embarcacao posicao : embarcacoes) {
 			tabuleiro.adicionarEmbarcacao(posicao);
-			//LOG.info(posicao.getTipo());
 		}
 	}
 
@@ -53,11 +48,31 @@ public class Jogo {
 	}
 
 
-	private void jogar() {
+	private void jogar() throws IOException {
 		while (! this.estaTerminado()) {
 			this.visualizar();
-			tabuleiro.verificarJogada(solicitarJogada());
+
+			Cordenada jogada = solicitarJogada(cliente);
+			servidor.enviarJogada(jogada);
+
+
+			String resposta = servidor.receberJogada();
+			Cordenada respostaCordenada = converterResposta(resposta);
+
+			if(respostaCordenada != null) {
+				this.posicaoAtacada(respostaCordenada.getLinha(), respostaCordenada.getColuna());
+			}
 		}
+	}
+
+	private Cordenada converterResposta(String resposta) {
+		if(resposta == null) {
+			return null;
+		}
+		String[] split = resposta.split(",");
+		int linha = Integer.parseInt(split[0]);
+		int coluna = Integer.parseInt(split[1]);
+		return new Cordenada(linha, coluna);
 	}
 
 	public void posicaoAtacada(int linha, int coluna) {
@@ -68,13 +83,7 @@ public class Jogo {
 		}
 	}
 
-	private Cordenada solicitarJogada() {
-		Jogada jogada;
-		if (LOCAL) {
-			jogada = new JogadaLocal();
-		} else {
-			jogada = new JogadaRemota();
-		}
+	private Cordenada solicitarJogada(Jogada jogada) {
 		return jogada.solicitarJogada();
 	}
 
@@ -87,28 +96,22 @@ public class Jogo {
 		visualizador.ver();
 	}
 
-	public static void main(String[] args) {
-
+	public static void main(String[] args) throws IOException {
 
 		Jogo game = new Jogo();
-
-//		if(args.length == 2) { // cliente ip e porta
-//			Jogo = new Jogo(args[0], Integer.parseInt(args[1]));
-//		} else if(args.length == 1) { // servidor porta
-//			Jogo = new Jogo(Integer.parseInt(args[0]));
-//		} else {
-//			jogo.run();
-//			System.out.println("Digite cliente ip e porta ou servidor porta");
-//			System.exit(0);
-//		}
+		game.servidor = new JogadaRemota();
+		game.cliente = new JogadaLocal();
+		game.servidor.inicar(2020);
+		game.cliente.inicar("127.0.0.1", 2020);
 
 		String file = "C://Users//RUAND//projetos//Faculdade//batalhanaval//src//";
 		System.out.println("Digite cliente ou servidor para o arquivo de configuracao do jogo");
 		Scanner scanner = new Scanner(System.in);
 		String nome = scanner.nextLine();
 
-		game.loader(file + nome + ".csv");
-		//game.loaderUsuario();
+
+		//game.loader(file + nome + ".csv");
+		game.loaderUsuario();
 		game.criarTabuleiro();
 		game.jogar();
 		game.terminar();

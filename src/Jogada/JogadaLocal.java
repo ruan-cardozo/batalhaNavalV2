@@ -1,23 +1,47 @@
 package Jogada;
 import components.Cordenada;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.Scanner;
 
-public class JogadaLocal extends Jogada {
-//	public Cliente (String ip, int port) {
-//		super(ip, port);
-//	}
+public class JogadaLocal /*cliente*/ extends Jogada {
+	private Socket clientSocket;
 
-//	public Cliente() {
-//		super();
-//	}
+	private PrintWriter out;
 
-//	@Override
-//	public void conectarNoServidor() throws IOException {
-//		clienteSocket = new Socket(ip, port);
-//		out = new PrintWriter(clienteSocket.getOutputStream(), true);
-//		in = new BufferedReader(new InputStreamReader(clienteSocket.getInputStream()));
-//	}
+	private BufferedReader in;
+
+	public void inicar(String ip, int port) throws IOException {
+		clientSocket = new Socket(ip, port);
+		//handler para escrita de dados
+		out = new PrintWriter(clientSocket.getOutputStream(), true);
+		//handler para leitura de dados
+		in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+	}
+
+	public void parar(){
+		try {
+			in.close();
+			out.close();
+			clientSocket.close();
+		} catch (IOException ex) {
+			System.out.println("Erro ao fechar a conexão.");
+		}
+	}
+
+	public void enviarJogada(Cordenada cordenada) {
+		out.println(cordenada);
+	}
+
+	public String receberJogada() throws IOException {
+		return in.readLine();
+	}
+
 	public Cordenada solicitarJogada() {
 		Scanner scanner = new Scanner(System.in);
 
@@ -47,13 +71,8 @@ public class JogadaLocal extends Jogada {
 				}
 			}
 			return new Cordenada(linha, coluna);
-//			this.enviar(c);
-//			return c;
 		} while (true);
 
 	}
 
-//	private void enviar(Cordenada c) {
-//		// logica para enviar para o servidor
-//	}
 }
