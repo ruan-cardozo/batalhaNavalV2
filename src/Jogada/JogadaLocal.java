@@ -13,7 +13,7 @@ public class JogadaLocal /*cliente*/ extends Jogada {
 	private PrintWriter out;
 	private BufferedReader in;
 
-	public void inicar(String ip, int port) throws IOException {
+	public void iniciar(String ip, int port) throws IOException {
 		clientSocket = new Socket(ip, port);
 		// handler para escrita de dados
 		out = new PrintWriter(clientSocket.getOutputStream(), true);

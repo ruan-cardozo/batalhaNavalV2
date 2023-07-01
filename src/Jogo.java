@@ -52,17 +52,49 @@ public class Jogo {
 		while (!estaTerminado()) {
 			visualizar();
 
-			Cordenada jogada = solicitarJogada(cliente);
-			cliente.enviarJogada(jogada);
+			if (cliente instanceof JogadaLocal) {
+				// Jogada do cliente (JogadaLocal)
+				Cordenada jogadaCliente = solicitarJogada(cliente);
+				cliente.enviarJogada(jogadaCliente);
+				marcarJogada(jogadaCliente, tabuleiroOponente);
 
-			Cordenada respostaCordenada = servidor.receberJogada();
+				// Verifica se o jogo terminou após a jogada do cliente
+				if (estaTerminado()) {
+					break;
+				}
+			}
 
-			if (respostaCordenada != null) {
-				marcarJogadaOponente(respostaCordenada);
-				tabuleiroJogador.posicaoAtacada();
+			// Jogada do servidor (JogadaRemota)
+			Cordenada jogadaServidor = servidor.receberJogada();
+			marcarJogada(jogadaServidor, tabuleiroJogador);
+			tabuleiroJogador.posicaoAtacada();
+
+			// Verifica se o jogo terminou após a jogada do servidor
+			if (estaTerminado()) {
+				break;
 			}
 		}
 	}
+
+	private void marcarJogada(Cordenada jogada, Tabuleiro tabuleiro) {
+		int linha = jogada.getLinha();
+		int coluna = jogada.getColuna();
+
+		if (tabuleiro.getPosicao(linha, coluna) == ' ') {
+			// A posição ainda não foi atacada
+			char resultado = tabuleiroJogador.marcarPosicao(linha, coluna, 'X');
+
+			if (resultado == 'X') {
+				System.out.println("Você acertou um navio!");
+			} else if (resultado == 'O') {
+				System.out.println("Você errou o alvo.");
+			}
+		} else {
+			// A posição já foi atacada anteriormente
+			System.out.println("Essa posição já foi atacada. Escolha outra posição.");
+		}
+	}
+
 
 	private void marcarJogadaOponente(Cordenada jogada) {
 		tabuleiroOponente.marcarPosicao(jogada.getLinha(), jogada.getColuna(), 'X');
@@ -93,7 +125,6 @@ public class Jogo {
 
 		game.loader(file + nome + ".csv");
 		game.criarTabuleiro();
-
 		if (nome.equalsIgnoreCase("servidor")) {
 			jogadaRemota.iniciar(2021);
 			game.servidor = jogadaRemota;
@@ -101,7 +132,7 @@ public class Jogo {
 		} else if (nome.equalsIgnoreCase("cliente")) {
 			System.out.println("Digite o IP do servidor:");
 			String ip = scanner.nextLine();
-			jogadaLocal.inicar(ip, 2021);
+			jogadaLocal.iniciar(ip, 2020);
 			game.servidor = jogadaRemota;
 			game.cliente = jogadaLocal;
 		} else {
