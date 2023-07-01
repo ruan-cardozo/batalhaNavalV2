@@ -6,6 +6,7 @@ import Jogada.JogadaLocal;
 import Jogada.JogadaRemota;
 import util.CarregadorEmbarcacoes;
 import view.Visualizador;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
@@ -16,7 +17,6 @@ public class Jogo {
 	private Tabuleiro tabuleiroOponente = new Tabuleiro(10);
 
 	private JogadaRemota servidor;
-
 	private JogadaLocal cliente;
 
 	public void loader(String file) {
@@ -48,13 +48,12 @@ public class Jogo {
 		System.out.println("Fim de jogo!");
 	}
 
-
 	private void jogar() throws IOException {
 		while (!estaTerminado()) {
 			visualizar();
 
 			Cordenada jogada = solicitarJogada(cliente);
-			servidor.enviarJogada(jogada);
+			cliente.enviarJogada(jogada);
 
 			String resposta = servidor.receberJogada();
 			Cordenada respostaCordenada = converterResposta(resposta);
@@ -75,7 +74,7 @@ public class Jogo {
 			return null;
 		}
 
-		String[] split = resposta.split(",");
+		String[] split = resposta.split(" ");
 		if (split.length != 2) {
 			return null;
 		}
@@ -111,21 +110,18 @@ public class Jogo {
 	}
 
 	public static void main(String[] args) throws IOException {
-
 		Jogo game = new Jogo();
 		game.servidor = new JogadaRemota();
 		game.cliente = new JogadaLocal();
-		game.servidor.inicar(2020);
-		game.cliente.inicar("127.0.0.1", 2020);
+		game.servidor.inicar(2021);
+		game.cliente.inicar("127.0.0.1", 2021);
 
 		String file = "C://Users//RUAND//projetos//Faculdade//batalhanaval//src//";
 		System.out.println("Digite cliente ou servidor para o arquivo de configuração do jogo");
 		Scanner scanner = new Scanner(System.in);
 		String nome = scanner.nextLine();
 
-
-		//game.loader(file + nome + ".csv");
-		game.loaderUsuario();
+		game.loader(file + nome + ".csv");
 		game.criarTabuleiro();
 		game.jogar();
 		game.terminar();
