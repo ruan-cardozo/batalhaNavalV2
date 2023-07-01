@@ -83,10 +83,8 @@ public class Jogo {
 
 	public static void main(String[] args) throws IOException {
 		Jogo game = new Jogo();
-		game.servidor = new JogadaRemota();
-		game.cliente = new JogadaLocal();
-		game.servidor.inicar(2021);
-		game.cliente.inicar("127.0.0.1", 2021);
+		JogadaLocal jogadaLocal = new JogadaLocal();
+		JogadaRemota jogadaRemota = new JogadaRemota();
 
 		String file = "C://Users//RUAND//projetos//Faculdade//batalhanaval//src//";
 		System.out.println("Digite cliente ou servidor para o arquivo de configuração do jogo");
@@ -95,7 +93,24 @@ public class Jogo {
 
 		game.loader(file + nome + ".csv");
 		game.criarTabuleiro();
+
+		if (nome.equalsIgnoreCase("servidor")) {
+			jogadaRemota.iniciar(2021);
+			game.servidor = jogadaRemota;
+			game.cliente = jogadaLocal;
+		} else if (nome.equalsIgnoreCase("cliente")) {
+			System.out.println("Digite o IP do servidor:");
+			String ip = scanner.nextLine();
+			jogadaLocal.inicar(ip, 2021);
+			game.servidor = jogadaRemota;
+			game.cliente = jogadaLocal;
+		} else {
+			System.out.println("Opção inválida. Encerrando o jogo.");
+			return;
+		}
+
 		game.jogar();
+		game.cliente.parar();
 		game.terminar();
 	}
 }

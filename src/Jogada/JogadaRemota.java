@@ -9,15 +9,17 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class JogadaRemota /*servidor*/ extends Jogada {
+public class JogadaRemota extends Jogada {
 	private ServerSocket serverSocket;
 	private Socket clientSocket;
 	private PrintWriter out;
 	private BufferedReader in;
 
-	public void inicar(int port) throws IOException {
+	public void iniciar(int port) throws IOException {
 		serverSocket = new ServerSocket(port);
+		System.out.println("Aguardando conexão do cliente...");
 		clientSocket = serverSocket.accept();
+		System.out.println("Cliente conectado.");
 		out = new PrintWriter(clientSocket.getOutputStream(), true);
 		in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 	}
