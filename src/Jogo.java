@@ -12,33 +12,34 @@ import java.util.Scanner;
 
 public class Jogo {
 	private List<Embarcacao> embarcacoes;
-	private Tabuleiro tabuleiro = new Tabuleiro(10);
+	private Tabuleiro tabuleiroJogador = new Tabuleiro(10);
+	private Tabuleiro tabuleiroOponente = new Tabuleiro(10);
 
 	private JogadaRemota servidor;
 
 	private JogadaLocal cliente;
 
 	public void loader(String file) {
-		this.guardarEmbarcacoe(CarregadorEmbarcacoes.carregar(file));
+		this.guardarEmbarcacoes(CarregadorEmbarcacoes.carregar(file));
 	}
 
 	public void loaderUsuario() {
-		this.guardarEmbarcacoe(CarregadorEmbarcacoes.loaderUsuario());
+		this.guardarEmbarcacoes(CarregadorEmbarcacoes.loaderUsuario());
 	}
 
-	private void guardarEmbarcacoe(List<Embarcacao> carregar) {
+	private void guardarEmbarcacoes(List<Embarcacao> carregar) {
 		this.embarcacoes = carregar;
 	}
 
 	private void criarTabuleiro() {
 		for (Embarcacao posicao : embarcacoes) {
-			tabuleiro.adicionarEmbarcacao(posicao);
+			tabuleiroJogador.adicionarEmbarcacao(posicao);
 		}
 	}
 
 	private void terminar() {
 		visualizar();
-		boolean todasEmbarcacoesDestruidas = tabuleiro.todasEmbarcacoesDestruidas();
+		boolean todasEmbarcacoesDestruidas = tabuleiroJogador.todasEmbarcacoesDestruidas();
 		if (todasEmbarcacoesDestruidas) {
 			System.out.println("Você ganhou!");
 		} else {
@@ -49,37 +50,50 @@ public class Jogo {
 
 
 	private void jogar() throws IOException {
-		while (! this.estaTerminado()) {
-			this.visualizar();
+		while (!estaTerminado()) {
+			visualizar();
 
 			Cordenada jogada = solicitarJogada(cliente);
 			servidor.enviarJogada(jogada);
 
-
 			String resposta = servidor.receberJogada();
 			Cordenada respostaCordenada = converterResposta(resposta);
 
-			if(respostaCordenada != null) {
-				this.posicaoAtacada(respostaCordenada.getLinha(), respostaCordenada.getColuna());
+			if (respostaCordenada != null) {
+				marcarJogadaOponente(respostaCordenada);
+				posicaoAtacada(respostaCordenada.getLinha(), respostaCordenada.getColuna());
 			}
 		}
 	}
 
+	private void marcarJogadaOponente(Cordenada jogada) {
+		tabuleiroOponente.marcarPosicao(jogada.getLinha(), jogada.getColuna(), 'X');
+	}
+
 	private Cordenada converterResposta(String resposta) {
-		if(resposta == null) {
+		if (resposta == null || resposta.isEmpty()) {
 			return null;
 		}
+
 		String[] split = resposta.split(",");
-		int linha = Integer.parseInt(split[0]);
-		int coluna = Integer.parseInt(split[1]);
-		return new Cordenada(linha, coluna);
+		if (split.length != 2) {
+			return null;
+		}
+
+		try {
+			int linha = Integer.parseInt(split[0]);
+			int coluna = Integer.parseInt(split[1]);
+			return new Cordenada(linha, coluna);
+		} catch (NumberFormatException e) {
+			return null;
+		}
 	}
 
 	public void posicaoAtacada(int linha, int coluna) {
-		if (tabuleiro.posicaoAtacada(linha, coluna) == 'X' || tabuleiro.posicaoAtacada(linha, coluna) == 'A') {
+		if (tabuleiroOponente.posicaoAtacada(linha, coluna) == 'X' || tabuleiroOponente.posicaoAtacada(linha, coluna) == 'A') {
 			System.out.println("Você já atacou essa posição");
 		} else {
-			tabuleiro.verificarJogada(new Cordenada(linha, coluna));
+			tabuleiroOponente.verificarJogada(new Cordenada(linha, coluna));
 		}
 	}
 
@@ -88,11 +102,11 @@ public class Jogo {
 	}
 
 	private boolean estaTerminado() {
-		return tabuleiro.todasEmbarcacoesDestruidas();
+		return tabuleiroJogador.todasEmbarcacoesDestruidas();
 	}
 
 	private void visualizar() {
-		Visualizador visualizador = new Visualizador(tabuleiro);
+		Visualizador visualizador = new Visualizador(tabuleiroJogador, tabuleiroOponente);
 		visualizador.ver();
 	}
 
@@ -105,7 +119,7 @@ public class Jogo {
 		game.cliente.inicar("127.0.0.1", 2020);
 
 		String file = "C://Users//RUAND//projetos//Faculdade//batalhanaval//src//";
-		System.out.println("Digite cliente ou servidor para o arquivo de configuracao do jogo");
+		System.out.println("Digite cliente ou servidor para o arquivo de configuração do jogo");
 		Scanner scanner = new Scanner(System.in);
 		String nome = scanner.nextLine();
 

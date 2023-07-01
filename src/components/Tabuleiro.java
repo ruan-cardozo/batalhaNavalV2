@@ -115,4 +115,7 @@ public class Tabuleiro {
 		return matriz[linha][coluna];
 	}
 
+	public void marcarPosicao(int linha, int coluna, char x) {
+		matriz[linha][coluna] = x;
+	}
 }

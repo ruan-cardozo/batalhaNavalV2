@@ -1,48 +1,55 @@
 package view;
 
 import components.Tabuleiro;
-import components.Cordenada;
 
 public class Visualizador {
-	private final Tabuleiro tabuleiro;
+	private final Tabuleiro tabuleiroJogador;
+	private final Tabuleiro tabuleiroOponente;
 
-	public Visualizador(Tabuleiro tabuleiro) {
-		this.tabuleiro = tabuleiro;
+	public Visualizador(Tabuleiro tabuleiroJogador, Tabuleiro tabuleiroOponente) {
+		this.tabuleiroJogador = tabuleiroJogador;
+		this.tabuleiroOponente = tabuleiroOponente;
 	}
+
 	public void ver() {
-		int tamanho = tabuleiro.getTamanho();
-		char[][] matriz = tabuleiro.getMatriz();
-//		System.out.print("\n ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
-//
-//		String pontuacaoText = "PLACAR " + tabuleiro.getPontuacao();
-//		int espacosEsquerda = (30 - pontuacaoText.length()) / 2;
-//		int espacosDireita = 30 - espacosEsquerda - pontuacaoText.length();
-//		System.out.print(" ░░░░" + " ".repeat(espacosEsquerda) + pontuacaoText + " ".repeat(espacosDireita) + "  ░░░░ \n");
-//		System.out.print(" ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n\n");
+		int tamanho = tabuleiroJogador.getTamanho();
+		char[][] matrizJogador = tabuleiroJogador.getMatriz();
+		char[][] matrizOponente = tabuleiroOponente.getMatriz();
 
+		System.out.println("Tabuleiro do Jogador             Tabuleiro do Oponente");
+		System.out.println();
 
-		System.out.print(" ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n\n");
-		System.out.print("            0 1 2 3 4 5 6 7 8 9\n");
+		System.out.print("   ");
+		for (int i = 0; i < tamanho; i++) {
+			System.out.print(i + " ");
+		}
+		System.out.print("      ");
+		for (int i = 0; i < tamanho; i++) {
+			System.out.print(i + " ");
+		}
+		System.out.println();
 
-		int linha;
-		int coluna = 0;
-		for (linha = 0; linha < tamanho; linha++) {
-			System.out.print("          " + linha + " ");
-			for (coluna = 0; coluna < tamanho; coluna++) {
-				char caracter = matriz[linha][coluna];
-				if (caracter == 0) {
-					System.out.print("░");
+		for (int linha = 0; linha < tamanho; linha++) {
+			System.out.print(linha + "  ");
+			for (int coluna = 0; coluna < tamanho; coluna++) {
+				char caracterJogador = matrizJogador[linha][coluna];
+				char caracterOponente = matrizOponente[linha][coluna];
+
+				if (caracterJogador == 0) {
+					System.out.print("░ ");
 				} else {
-					System.out.print(caracter);
+					System.out.print(caracterJogador + " ");
 				}
-				System.out.print(" ");
+			}
+			System.out.print("    ");
+
+			System.out.print(linha + "  ");
+			for (int coluna = 0; coluna < tamanho; coluna++) {
+				System.out.print("░ ");
 			}
 			System.out.println();
-
 		}
 
-		System.out.print("\n\n");
-		System.out.print(" ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n\n");
-		System.out.println("         Jogada (linha,coluna) -> \n");
+		System.out.println();
 	}
 }

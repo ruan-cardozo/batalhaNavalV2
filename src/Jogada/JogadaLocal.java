@@ -35,11 +35,12 @@ public class JogadaLocal /*cliente*/ extends Jogada {
 	}
 
 	public void enviarJogada(Cordenada cordenada) {
-		out.println(cordenada);
+		out.println(cordenada.getLinha() + " " + cordenada.getColuna());
 	}
 
 	public String receberJogada() throws IOException {
-		return in.readLine();
+		String resposta = in.readLine();
+		return (resposta != null) ? resposta : "";
 	}
 
 	public Cordenada solicitarJogada() {
