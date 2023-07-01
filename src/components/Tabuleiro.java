@@ -118,4 +118,8 @@ public class Tabuleiro {
 	public void marcarPosicao(int linha, int coluna, char x) {
 		matriz[linha][coluna] = x;
 	}
+
+	public void posicaoAtacada() {
+		matriz[cordenada.getLinha()][cordenada.getColuna()] = 'X';
+	}
 }

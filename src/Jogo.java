@@ -55,45 +55,17 @@ public class Jogo {
 			Cordenada jogada = solicitarJogada(cliente);
 			cliente.enviarJogada(jogada);
 
-			String resposta = servidor.receberJogada();
-			Cordenada respostaCordenada = converterResposta(resposta);
+			Cordenada respostaCordenada = servidor.receberJogada();
 
 			if (respostaCordenada != null) {
 				marcarJogadaOponente(respostaCordenada);
-				posicaoAtacada(respostaCordenada.getLinha(), respostaCordenada.getColuna());
+				tabuleiroJogador.posicaoAtacada();
 			}
 		}
 	}
 
 	private void marcarJogadaOponente(Cordenada jogada) {
 		tabuleiroOponente.marcarPosicao(jogada.getLinha(), jogada.getColuna(), 'X');
-	}
-
-	private Cordenada converterResposta(String resposta) {
-		if (resposta == null || resposta.isEmpty()) {
-			return null;
-		}
-
-		String[] split = resposta.split(" ");
-		if (split.length != 2) {
-			return null;
-		}
-
-		try {
-			int linha = Integer.parseInt(split[0]);
-			int coluna = Integer.parseInt(split[1]);
-			return new Cordenada(linha, coluna);
-		} catch (NumberFormatException e) {
-			return null;
-		}
-	}
-
-	public void posicaoAtacada(int linha, int coluna) {
-		if (tabuleiroOponente.posicaoAtacada(linha, coluna) == 'X' || tabuleiroOponente.posicaoAtacada(linha, coluna) == 'A') {
-			System.out.println("Você já atacou essa posição");
-		} else {
-			tabuleiroOponente.verificarJogada(new Cordenada(linha, coluna));
-		}
 	}
 
 	private Cordenada solicitarJogada(Jogada jogada) {
