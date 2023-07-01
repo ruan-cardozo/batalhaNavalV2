@@ -142,6 +142,7 @@ public class Jogo {
 
 		game.jogar();
 		game.cliente.parar();
+		game.servidor.parar(); // Adicione esta linha para parar o servidor também
 		game.terminar();
 	}
 }
