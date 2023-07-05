@@ -49,7 +49,6 @@ public class Visualizador {
 			}
 			System.out.println();
 		}
-
 		System.out.println();
 	}
 }
